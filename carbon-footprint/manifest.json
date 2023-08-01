@@ -1,0 +1,12 @@
+{
+    "name": "Website Carbon Footprint Calculator",
+    "version": "1.0.0",
+    "description": "calculates the carbon footprint of a website",
+    "manifest_version": 3,
+    "author": "Barbara Huemer",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Latest Covid Report"
+    }
+}
+
