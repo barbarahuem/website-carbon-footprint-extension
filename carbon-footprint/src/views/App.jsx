@@ -5,28 +5,37 @@ const App = () => {
 
     useEffect(() => {
     //fetch data from "https://api.thegreenwebfoundation.org/api/v3/greencheck/climateaction.tech"
-    const hostname = new URL("https://developers.google.com").hostname;
-    const fetchData = async () => {
-        const response = await fetch("https://api.thegreenwebfoundation.org/api/v3/greencheck/" + hostname);
-        const data = await response.json();
-        console.log(data);
 
-    }
-    fetchData();
     }, []);  
 
-    const inputRef = useRef();
-    const [hostname, setHostname] = useState("");
+    const [url, setUrl] = useState("https://api.thegreenwebfoundation.org");
 
-    const checkUrl = (currentUrl) => {
-        return;
-        /*
-        if (currentUrl === "") {
-            return;
+    const checkUrl = (url) => {
+
+        const hostname = new URL(url).hostname;
+        const fetchData = async () => {
+            const response = await fetch("https://api.thegreenwebfoundation.org/api/v3/greencheck/" + hostname);
+            const data = await response.json();
+            console.log(data, url);
+            showInsights(url, data.green);
         }
-        const hostname = new URL(currentUrl).hostname;
-        setHostname(hostname);
-        */
+        fetchData();
+        
+    }
+
+    const showInsights = (url, isGreenHost) => {
+        return (
+            <div>
+                
+                <PageSpeedInsights url={url}/> 
+                {isGreenHost ?
+                    <p>Host is Green</p> 
+                    :
+                    <p>Host is NOT Green</p>
+                }
+            </div>
+        )
+        
     }
 
 
@@ -34,11 +43,10 @@ const App = () => {
         <div>
             <h1>App</h1>
             <label htmlFor="bar">Insert Url</label><br/>
-            <input type="text" ref={inputRef}/>
-            <button onClick={checkUrl(inputRef.current)}>Check</button>
-            <p>{hostname}</p>
+            <input type="text" onChange={(e) => setUrl(e.target.value)}/>
+            <button onClick={checkUrl(url)}>Check</button>
         </div>
-        <PageSpeedInsights />
+        {showInsights()}
         </>
     );
 }
