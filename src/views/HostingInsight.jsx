@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const HostingInsight = ({url}) => {
-
-  const [isGreenHost, setIsGreenHost] = useState(false);
+const HostingInsight = ({url, isGreenHost, setIsGreenHost}) => {
 
   useEffect(() => {
       const hostname = new URL(url).hostname;

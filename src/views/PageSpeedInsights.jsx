@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './PageSpeedInsights.css';
 
-const PageSpeedInsights = ({hostname}) => {
+const PageSpeedInsights = ({hostname, setBytesSent}) => {
   const [cruxMetrics, setCruxMetrics] = useState({});
   const [lighthouseMetrics, setLighthouseMetrics] = useState({});
 
@@ -54,9 +54,25 @@ const PageSpeedInsights = ({hostname}) => {
         },
           'Estimated Input Latency': {
             sec: lighthouse.audits['estimated-input-latency']?.displayValue || 'N/A'
-        }
+        },
+        'Total Byte Weight': {
+          sec: lighthouse.audits['total-byte-weight']?.displayValue || 'N/A'
+        },
+        'Offscreen Images': {
+          sec: lighthouse.audits['offscreen-images']?.displayValue || 'N/A'
+        },
+        'Render Blocking Resources': {
+          sec: lighthouse.audits['render-blocking-resources']?.displayValue || 'N/A'
+        },
+        'Unused CSS': {
+          sec: lighthouse.audits['unused-css-rules']?.displayValue || 'N/A'
+        },
+
         }
         setLighthouseMetrics(lighthouseMetrics);
+        let bytesSentTemp = lighthouseMetrics['Total Byte Weight'].sec;
+        setBytesSent(bytesSentTemp.replace(/\D/g,'')*1024);
+        console.log(bytesSentTemp.replace(/\D/g,'') * 1024);
         console.log(lighthouseMetrics);
       }
     }
@@ -75,9 +91,6 @@ const PageSpeedInsights = ({hostname}) => {
     }
     return query;
   };
-
-  // Implement your rendering logic here using React components
-  // You can access cruxMetrics and lighthouseMetrics state variables to render the data
 
   return (
     <div className="PageSpeedInsights">
