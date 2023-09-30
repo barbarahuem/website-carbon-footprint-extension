@@ -4,6 +4,7 @@ import './PageSpeedInsights.css';
 const PageSpeedInsights = ({hostname, setBytesSent}) => {
   const [cruxMetrics, setCruxMetrics] = useState({});
   const [lighthouseMetrics, setLighthouseMetrics] = useState({});
+  const [lighthousePotentialSavings, setLighthousePotentialSavings] = useState({});
 
   useEffect(() => {
     async function run() {
@@ -58,21 +59,25 @@ const PageSpeedInsights = ({hostname, setBytesSent}) => {
         'Total Byte Weight': {
           sec: lighthouse.audits['total-byte-weight']?.displayValue || 'N/A'
         },
-        'Offscreen Images': {
-          sec: lighthouse.audits['offscreen-images']?.displayValue || 'N/A'
-        },
-        'Render Blocking Resources': {
-          sec: lighthouse.audits['render-blocking-resources']?.displayValue || 'N/A'
-        },
-        'Unused CSS': {
-          sec: lighthouse.audits['unused-css-rules']?.displayValue || 'N/A'
-        },
-
         }
+
+        const lighthousePotentialSavings = {
+          'Offscreen Images': {
+            sec: lighthouse.audits['offscreen-images']?.displayValue || 'N/A'
+          },
+          'Render Blocking Resources': {
+            sec: lighthouse.audits['render-blocking-resources']?.displayValue || 'N/A'
+          },
+          'Unused CSS': {
+            sec: lighthouse.audits['unused-css-rules']?.displayValue || 'N/A'
+          },
+        }
+
         setLighthouseMetrics(lighthouseMetrics);
+        setLighthousePotentialSavings(lighthousePotentialSavings);
+
         let bytesSentTemp = lighthouseMetrics['Total Byte Weight'].sec;
-        setBytesSent(bytesSentTemp.replace(/\D/g,'')*1024);
-        console.log(bytesSentTemp.replace(/\D/g,'') * 1024);
+        setBytesSent(bytesSentTemp.replace(/\D/g,'') * 1024); // Kibibytes to bytes
         console.log(lighthouseMetrics);
       }
     }
@@ -101,10 +106,10 @@ const PageSpeedInsights = ({hostname, setBytesSent}) => {
           key={metric}
           
           >
-          <strong>{metric}:</strong> 
+          <strong>{metric}: </strong> 
           <em 
             className={ 
-              value.sec != 'N/A' ? 
+              value.sec !== 'N/A' ? 
               Number(value.sec.slice(0, 2)) <= value.goodMax ? 'good' : 
               Number(value.sec.slice(0, 2)) > value.averageMax ? 'poor' : 
               'average' :
@@ -115,7 +120,21 @@ const PageSpeedInsights = ({hostname, setBytesSent}) => {
           </em>
         </li>
       ))}
-    </ul>
+      </ul>
+      <ul>
+      {Object.entries(lighthousePotentialSavings).map(([metric, value]) => (
+        <li 
+          key={metric}
+          
+          >
+          <strong>{metric}: </strong> 
+          <em>
+                {value.sec}
+          </em>  
+        </li>
+      ))}
+      </ul>
+      
   </div>
   );
 }

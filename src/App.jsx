@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Rings } from 'react-loader-spinner';
 import PageSpeedInsights from './views/PageSpeedInsights';
 import HostingInsight from './views/HostingInsight';
 import Emissions from './views/Emissions';
@@ -16,6 +17,16 @@ const App = () => {
             {/* <input type="text" onChange={(e) => setUrl(e.target.value)}/>*/}
             <button >Check</button>
         </div>
+        <Rings
+            height="80"
+            width="80"
+            color="#4fa94d"
+            radius="6"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="rings-loading"
+            />
         <PageSpeedInsights url={url} setBytesSent={setBytesSent}/>
         <HostingInsight url={url} isGreenHost={isGreenHost} setIsGreenHost={setIsGreenHost}/>
         <Emissions url={url} isGreenHost={isGreenHost} bytesSent={bytesSent} />
