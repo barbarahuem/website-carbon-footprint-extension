@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './styles/PageSpeedInsights.css';
 
 interface LighthouseMetrics {
   [key: string]: {
@@ -17,9 +18,10 @@ interface LighthousePotentialSavings {
 
 interface PageSpeedInsightsProps {
     url: string;
-    setBytesSent: React.Dispatch<React.SetStateAction<number>>;
+    setBytesSent: React.Dispatch<React.SetStateAction<string>>;
     setIsFetching: React.Dispatch<React.SetStateAction<boolean>>;
-}
+    setCarbonFootprint: React.Dispatch<React.SetStateAction<number>>;
+  }
 
 interface Parameters {
     [key: string]: string;
@@ -29,6 +31,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   url,
   setBytesSent,
   setIsFetching,
+  setCarbonFootprint,
 }) => {
   const [cruxMetrics, setCruxMetrics] = useState<{ [key: string]: string }>({});
   const [lighthouseMetrics, setLighthouseMetrics] = useState<LighthouseMetrics>({});
@@ -54,6 +57,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
 
       if (json.lighthouseResult) {
         const lighthouse = json.lighthouseResult;
+        if (lighthouse) {
         const lighthouseMetrics: LighthouseMetrics = {
           'First Contentful Paint': {
             goodMax: 1.8,
@@ -84,10 +88,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
           },
           'Estimated Input Latency': {
             sec: lighthouse.audits['estimated-input-latency']?.displayValue || 'N/A',
-          },
-          'Total Byte Weight': {
-            sec: lighthouse.audits['total-byte-weight']?.displayValue || 'N/A',
-          },
+          }
         };
 
         const lighthousePotentialSavings: LighthousePotentialSavings = {
@@ -104,10 +105,12 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
 
         setLighthouseMetrics(lighthouseMetrics);
         setLighthousePotentialSavings(lighthousePotentialSavings);
-
+        
         let bytesSentTemp = String(lighthouseMetrics['Total Byte Weight'].sec);
-        setBytesSent(Number(bytesSentTemp.replace(/\D/g, '')) * 1024); // Kibibytes to bytes
+        setBytesSent(bytesSentTemp);
+        setCarbonFootprint(Number(bytesSentTemp.replace(/\D/g, '')) * 1024); // Kibibytes to bytes
         setIsFetching(false);
+      }
       }
     }
 
@@ -131,17 +134,18 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
       <h1>Lighthouse Metrics</h1>
       <ul>
         {Object.entries(lighthouseMetrics).map(([metric, value]) => (
-          <li key={metric}>
+          <li key={metric} className='metrics-list'>
             <strong>{metric}: </strong>
             <em
               className={
-                value.goodMax && value.averageMax
+                  value.goodMax && value.averageMax
                   ? Number(value.sec.slice(0, 2)) <= value.goodMax
                     ? 'good'
                     : Number(value.sec.slice(0, 2)) > value.averageMax
                     ? 'poor'
                     : 'average'
                   : ''
+                
               }
             >
               {value.sec}

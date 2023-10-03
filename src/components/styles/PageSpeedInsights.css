@@ -1,0 +1,14 @@
+.metrics-list {
+    list-style: none;
+}
+
+.good {
+    color: green;
+}
+.average {
+    color: chocolate;
+}
+.poor {
+    color: red;
+}
+

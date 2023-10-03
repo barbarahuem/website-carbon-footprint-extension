@@ -1,0 +1,22 @@
+.emissions-bubble {
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    background-color: blue;
+    vertical-align: middle;
+    margin: auto;
+    display: grid;
+}
+
+.emissions-bubble p {
+    color: white;
+    text-align: center;
+}
+
+.emissions-bubble-emissions {
+    font-size: 1.5rem;
+}
+
+.emissions-bubble-text {
+    font-size: 1rem;
+}
