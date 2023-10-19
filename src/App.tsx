@@ -6,7 +6,7 @@ import "./App.css"
 
 
 function App() {
-  const [isGreenHost, setIsGreenHost] = useState(false);
+  const [isGreenHost, setIsGreenHost] = useState(true);
   const [bytesSent, setBytesSent] = useState('');
   const [carbonFootprint, setCarbonFootprint] = useState(0); // [kgCO2e
   const [isFetching, setIsFetching] = useState(true);
@@ -16,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <Emissions isGreenHost={isGreenHost} carbonFootprint={carbonFootprint} />
+      <HostingInsight url={url} isGreenHost={isGreenHost} setIsGreenHost={setIsGreenHost}/>
       <p>{bytesSent}</p>
       <PageSpeedInsights 
         url={url} 
@@ -23,7 +24,6 @@ function App() {
         setIsFetching={setIsFetching} 
         setCarbonFootprint={setCarbonFootprint}
         />
-      <HostingInsight url={url} isGreenHost={isGreenHost} setIsGreenHost={setIsGreenHost}/>
     </div>
   );
 }

@@ -33,7 +33,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   setIsFetching,
   setCarbonFootprint,
 }) => {
-  const [cruxMetrics, setCruxMetrics] = useState<{ [key: string]: string }>({});
+  const [cruxMetrics, setCruxMetrics] = useState<{ [key: string]: string }>({}); 
   const [lighthouseMetrics, setLighthouseMetrics] = useState<LighthouseMetrics>({});
   const [lighthousePotentialSavings, setLighthousePotentialSavings] =
     useState<LighthousePotentialSavings>({});
@@ -85,9 +85,6 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
             averageMax: 6.5,
             score: lighthouse.audits['first-cpu-idle']?.score || 'N/A',
             sec: lighthouse.audits['first-cpu-idle']?.displayValue || 'N/A',
-          },
-          'Estimated Input Latency': {
-            sec: lighthouse.audits['estimated-input-latency']?.displayValue || 'N/A',
           }
         };
 
@@ -101,14 +98,17 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
           'Unused CSS': {
             sec: lighthouse.audits['unused-css-rules']?.displayValue || 'N/A',
           },
+          'Bytes Sent': {
+            sec: lighthouse.audits['total-byte-weight']?.displayValue || 'N/A',
+          }
         };
 
         setLighthouseMetrics(lighthouseMetrics);
         setLighthousePotentialSavings(lighthousePotentialSavings);
         
-        let bytesSentTemp = String(lighthouseMetrics['Total Byte Weight'].sec);
-        setBytesSent(bytesSentTemp);
-        setCarbonFootprint(Number(bytesSentTemp.replace(/\D/g, '')) * 1024); // Kibibytes to bytes
+        const totalByteWeight = lighthouse.audits['total-byte-weight']?.displayValue || 'N/A';
+        setBytesSent(totalByteWeight);
+        setCarbonFootprint(Number(totalByteWeight.replace(/\D/g, '')) * 1024); // Kibibytes to bytes
         setIsFetching(false);
       }
       }
@@ -132,27 +132,25 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   return (
     <div className="PageSpeedInsights">
       <h1>Lighthouse Metrics</h1>
-      <ul>
+      <div className='metrics-list'>
         {Object.entries(lighthouseMetrics).map(([metric, value]) => (
-          <li key={metric} className='metrics-list'>
-            <strong>{metric}: </strong>
-            <em
-              className={
+          <div key={metric} className="metrics-list-item">
+            <div key={metric} className={
                   value.goodMax && value.averageMax
                   ? Number(value.sec.slice(0, 2)) <= value.goodMax
                     ? 'good'
                     : Number(value.sec.slice(0, 2)) > value.averageMax
                     ? 'poor'
                     : 'average'
-                  : ''
-                
-              }
-            >
-              {value.sec}
-            </em>
-          </li>
+                  : ''} >
+              <p className='metrics-score'>
+                  {value.sec}
+              </p>
+            </div>
+          <p>{metric}</p>
+          </div>
         ))}
-      </ul>
+      </div>
       <ul>
         {Object.entries(lighthousePotentialSavings).map(([metric, value]) => (
           <li key={metric}>

@@ -1,14 +1,36 @@
 .metrics-list {
     list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.metrics-list-item {
+    display: grid;
+    width: 5rem;
+    margin: 10px;
+}
+
+.metrics-list-item div {
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
 }
 
 .good {
-    color: green;
+    background-color: var(--light-green);
 }
 .average {
-    color: chocolate;
+    background-color: var(--orange);
 }
 .poor {
-    color: red;
+    background-color: var(--red);
 }
 
+.metrics-name {
+    font-size: 0.8rem;
+}
+
+.metrics-score {
+    font-size: 1.3rem;
+}

@@ -2,21 +2,35 @@
     border-radius: 50%;
     width: 10rem;
     height: 10rem;
-    background-color: blue;
-    vertical-align: middle;
+    background-color: var(--light-green);
     margin: auto;
-    display: grid;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 15px;
+    border-style: solid;
+    border-color: var(--dark-green);
 }
 
 .emissions-bubble p {
-    color: white;
-    text-align: center;
+    font-weight: 600;
+    margin: 2px;
+}
+
+.emissions-bubble-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .emissions-bubble-emissions {
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .emissions-bubble-text {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    color: var(--background);
+    width: 60%;
 }

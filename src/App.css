@@ -1,5 +1,8 @@
 .App {
     text-align: center;
+    color: white;
+    margin: 10px;
+    font-weight: 500;
 }
 
 .container {
@@ -8,4 +11,13 @@
     align-items: center;
     justify-content: center;
     width: 100vh;
+}
+
+body {
+    background-color: var(--background);
+    --background: #021C1E;
+    --dark-green: #004446;
+    --light-green: #2D7974;
+    --red: #FF646D;
+    --orange: #E1A03E;
 }
