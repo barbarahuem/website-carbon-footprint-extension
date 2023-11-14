@@ -1,14 +1,20 @@
 .metrics-list {
     list-style: none;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
 }
 
 .metrics-list-item {
     display: grid;
     width: 5rem;
     margin: 10px;
+}
+
+.metrics-list-metric {
+    height: 48px;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 .metrics-list-item div {
@@ -19,6 +25,7 @@
 
 .good {
     background-color: var(--light-green);
+    align-items: center;
 }
 .average {
     background-color: var(--orange);
@@ -33,4 +40,16 @@
 
 .metrics-score {
     font-size: 1.3rem;
+    margin-top: 24px;
+}
+
+
+.metrics-savings {
+    list-style: none;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #063236;
 }

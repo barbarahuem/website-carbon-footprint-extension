@@ -1,16 +1,35 @@
 .emissions-bubble {
-    border-radius: 50%;
-    width: 10rem;
-    height: 10rem;
-    background-color: var(--light-green);
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    border: 15px;
-    border-style: solid;
-    border-color: var(--dark-green);
+    width: 250px; height: 100px;
+	background: var(--light-green);
+	border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	position: relative;
+	margin: 80px auto 20px;
+}
+
+
+.emissions-bubble:after, .emissions-bubble:before {
+	content: '';
+	position: absolute;
+	background: var(--light-green);
+	z-index: -1
+}
+
+.emissions-bubble:after {
+	width: 120px; height: 120px;
+	top: -60px; left: 40px;
+	border-radius: 80px;
+	-webkit-border-radius: 80px;
+	-moz-border-radius: 80px;
+}
+
+.emissions-bubble:before {
+	width: 90px; height: 90px;
+	top: -50px; right: 40px;
+	border-radius: 200px;
+	-webkit-border-radius: 180px;
+	-moz-border-radius: 180px;
 }
 
 .emissions-bubble p {

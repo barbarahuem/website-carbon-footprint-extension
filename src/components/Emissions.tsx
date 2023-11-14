@@ -13,7 +13,7 @@ const Emissions: React.FC<EmissionsProps> = ({ isGreenHost, carbonFootprint }) =
 
   console.log(
     `Sending a gigabyte, had a carbon footprint of ${estimatedCO2.toFixed(
-      2
+      3
     )} grams of CO2`
   );
 
