@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Emissions from "./components/Emissions";
 import HostingInsight from "./components/HostingInsights";
 import PageSpeedInsights from "./components/PageSpeedInsights";
 import EmissionComparison from "./components/EmissionComparison";
 import "./App.css"
 
+import { Rings } from "react-loader-spinner";
 import { Rings } from "react-loader-spinner";
 
 function App() {
@@ -18,7 +20,6 @@ function App() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       let url = tabs[0].url as string;
       setUrl(url);
-      console.log("url: " + url);
     });
     if(bytesSent !== '') {
       setIsFetching(false);
