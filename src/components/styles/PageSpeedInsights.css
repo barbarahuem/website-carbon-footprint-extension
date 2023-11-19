@@ -1,30 +1,47 @@
 .metrics-list {
     list-style: none;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .metrics-list-item {
     display: grid;
     width: 5rem;
-    margin: 10px;
+    padding: 15px;
 }
 
-.metrics-list-item div {
+/* first three metrics-list-item should have a border on the bottom */
+.metrics-list-item:nth-child(-n+3) {
+    border-bottom: 1px solid #131F21;
+}
+/* all metrics-list-item should have a border on the right instead of the last*/
+.metrics-list-item:not(:nth-child(3n)) {
+    border-right: 1px solid #131F21;
+}
+
+.metrics-list-metric {
+    height: 48px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.good, .average, .poor {
+    margin: auto;
+    border: 4px solid;
     border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .good {
-    background-color: var(--light-green);
+    border-color: var(--light-green);
+    align-items: center;
 }
 .average {
-    background-color: var(--orange);
+    border-color: var(--orange);
 }
 .poor {
-    background-color: var(--red);
+    border-color: var(--red);
 }
 
 .metrics-name {
@@ -32,5 +49,17 @@
 }
 
 .metrics-score {
-    font-size: 1.3rem;
+    font-size: 1rem;
+    margin-top: 12px;
+}
+
+
+.metrics-savings {
+    list-style: none;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #063236;
 }

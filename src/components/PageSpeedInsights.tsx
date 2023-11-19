@@ -19,7 +19,6 @@ interface LighthousePotentialSavings {
 interface PageSpeedInsightsProps {
     url: string;
     setBytesSent: React.Dispatch<React.SetStateAction<string>>;
-    setIsFetching: React.Dispatch<React.SetStateAction<boolean>>;
     setCarbonFootprint: React.Dispatch<React.SetStateAction<number>>;
   }
 
@@ -30,7 +29,6 @@ interface Parameters {
 const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   url,
   setBytesSent,
-  setIsFetching,
   setCarbonFootprint,
 }) => {
   const [cruxMetrics, setCruxMetrics] = useState<{ [key: string]: string }>({}); 
@@ -52,8 +50,6 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
         };
         setCruxMetrics(cruxMetrics);
       }
-
-      console.log(json);
 
       if (json.lighthouseResult) {
         const lighthouse = json.lighthouseResult;
@@ -109,11 +105,9 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
         const totalByteWeight = lighthouse.audits['total-byte-weight']?.displayValue || 'N/A';
         setBytesSent(totalByteWeight);
         setCarbonFootprint(Number(totalByteWeight.replace(/\D/g, '')) * 1024); // Kibibytes to bytes
-        setIsFetching(false);
       }
       }
     }
-
     run();
   }, []);
 
@@ -135,6 +129,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
       <div className='metrics-list'>
         {Object.entries(lighthouseMetrics).map(([metric, value]) => (
           <div key={metric} className="metrics-list-item">
+            <p className="metrics-list-metric">{metric}</p>
             <div key={metric} className={
                   value.goodMax && value.averageMax
                   ? Number(value.sec.slice(0, 2)) <= value.goodMax
@@ -147,16 +142,19 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
                   {value.sec}
               </p>
             </div>
-          <p>{metric}</p>
           </div>
         ))}
       </div>
-      <ul>
+      <h1>Potential Savings</h1>
+      <ul className='metrics-savings'>
         {Object.entries(lighthousePotentialSavings).map(([metric, value]) => (
-          <li key={metric}>
-            <strong>{metric}: </strong>
-            <em>{value.sec}</em>
-          </li>
+          <>
+            <li key={metric}>
+              <strong>{metric}: </strong>
+              <em>{value.sec}</em>
+            </li>
+            <hr />
+          </>
         ))}
       </ul>
     </div>

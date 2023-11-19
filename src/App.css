@@ -10,14 +10,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vh;
+    width: 70vh;
+    height: 70vh;
 }
 
 body {
     background-color: var(--background);
-    --background: #021C1E;
+    --background: #040E0F;
     --dark-green: #004446;
-    --light-green: #2D7974;
-    --red: #FF646D;
-    --orange: #E1A03E;
+    --light-green: #007C05;
+    --red: #BE1111;
+    --orange: #B45B09;
+}
+
+.carbon-insights-invisible {
+    display: none;
+}
+
+.carbon-insights-visible {
+    display: block;
+    padding-top: 400px;
 }

@@ -13,7 +13,7 @@ const Emissions: React.FC<EmissionsProps> = ({ isGreenHost, carbonFootprint }) =
 
   console.log(
     `Sending a gigabyte, had a carbon footprint of ${estimatedCO2.toFixed(
-      2
+      3
     )} grams of CO2`
   );
 
@@ -21,10 +21,7 @@ const Emissions: React.FC<EmissionsProps> = ({ isGreenHost, carbonFootprint }) =
     <div className="emissions-bubble">
       <div className="emissions-bubble-content">
         <p className="emissions-bubble-emissions">
-          {estimatedCO2.toFixed(3)} 
-        </p>
-        <p className="emissions-bubble-text">
-          grams of CO2 per load
+          {estimatedCO2.toFixed(3)} <em className="emissions-bubble-g">g</em>
         </p>
       </div>
     </div>

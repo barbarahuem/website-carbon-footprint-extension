@@ -1,0 +1,8 @@
+.emissions-comparison-content {
+    background-color: white;
+    color: var(--background);
+    border-radius: 15px;
+    height: 40px;
+    width: 100%;
+    margin-top: 10px;
+}

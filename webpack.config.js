@@ -29,6 +29,13 @@ module.exports = {
                 ]
 
             },
+            { 
+                test: /\\.(png|jp(e*)g|svg|gif)$/, 
+                use: [
+                    {
+                        loader: 'file-loader',
+            }
+        ], }
         ],
     },
     plugins: [
@@ -50,7 +57,8 @@ module.exports = {
         hints: false,
         maxEntrypointSize: 512000,
         maxAssetSize: 512000
-    }
+    },
+    
 };
 
 function getHtmlPlugins(chunks) {
