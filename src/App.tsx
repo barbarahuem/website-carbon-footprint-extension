@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import React, { useEffect, useState } from "react";
 import Emissions from "./components/Emissions";
 import HostingInsight from "./components/HostingInsights";
 import PageSpeedInsights from "./components/PageSpeedInsights";
 import EmissionComparison from "./components/EmissionComparison";
 import "./App.css"
 
-import { Rings } from "react-loader-spinner";
 import { Rings } from "react-loader-spinner";
 
 function App() {
