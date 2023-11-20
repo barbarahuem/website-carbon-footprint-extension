@@ -1,3 +1,7 @@
+.emissions-comparison-headText {
+    text-align: left;
+}
+
 .emissions-comparison-content {
     background-color: white;
     color: var(--background);
@@ -5,4 +9,16 @@
     height: 40px;
     width: 100%;
     margin-top: 10px;
+    display: flex;
+}
+
+.emissions-comparison-content svg {
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.emissions-comparison-em {
+    font-style: normal;
+    font-weight: 800;
 }

@@ -4,12 +4,14 @@ import "./styles/Emissions.css"
 interface EmissionsProps {
   isGreenHost: boolean;
   carbonFootprint: number;
+  setEmissions: (emissions: number) => void;
 }
 
-const Emissions: React.FC<EmissionsProps> = ({ isGreenHost, carbonFootprint }) => {
+const Emissions: React.FC<EmissionsProps> = ({ isGreenHost, carbonFootprint, setEmissions }) => {
   const co2Emission = new co2();
 
   const estimatedCO2 = co2Emission.perByte(carbonFootprint, isGreenHost);
+  setEmissions(estimatedCO2);
 
   console.log(
     `Sending a gigabyte, had a carbon footprint of ${estimatedCO2.toFixed(

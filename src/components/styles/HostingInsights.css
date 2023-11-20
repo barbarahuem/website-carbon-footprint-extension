@@ -1,0 +1,8 @@
+.host-is-green p {
+    color: var(--light-green);
+    font-weight: 800;
+}
+.host-is-not-green p {
+    color: var(--red);
+    font-weight: 800;
+}

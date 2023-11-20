@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./styles/HostingInsights.css";
 
 interface HostingInsightProps {
   url: string;
@@ -21,6 +22,7 @@ const HostingInsight: React.FC<HostingInsightProps> = ({
         const data = await response.json();
         console.log(data, url);
         setIsGreenHost(data.green);
+        console.log(isGreenHost);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -29,7 +31,7 @@ const HostingInsight: React.FC<HostingInsightProps> = ({
   }, [url, setIsGreenHost]);
 
   return (
-    <div>
+    <div className={isGreenHost ? "host-is-green" : "host-is-not-green"}>
       {isGreenHost ? (
         <p>Host is Green</p>
       ) : (

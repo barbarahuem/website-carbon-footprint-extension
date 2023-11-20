@@ -8,11 +8,12 @@ import "./App.css"
 import { Rings } from "react-loader-spinner";
 
 function App() {
-  const [isGreenHost, setIsGreenHost] = useState(true);
+  const [isGreenHost, setIsGreenHost] = useState(false);
   const [bytesSent, setBytesSent] = useState('');
   const [carbonFootprint, setCarbonFootprint] = useState(0); // [kgCO2e
   const [isFetching, setIsFetching] = useState(true);
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState('');
+  const [emissions, setEmissions] = useState(0);
 
   useEffect(() => {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -29,17 +30,17 @@ function App() {
     <div className="App">
     {isFetching && 
       <div style={{paddingTop: "50px"}}>
-        <Rings color="white"/>
+        <Rings color="white" />
         <p>Loading...</p>
       </div>
        }
       <div className={isFetching ? "carbon-insights-invisible" : "carbon-insights-visible"}>
-        <Emissions isGreenHost={isGreenHost} carbonFootprint={carbonFootprint} />
+        <Emissions isGreenHost={isGreenHost} carbonFootprint={carbonFootprint} setEmissions={setEmissions} />
           { url &&
             <>
-            <EmissionComparison />
-            <HostingInsight url={url} isGreenHost={isGreenHost} setIsGreenHost={setIsGreenHost}/>
+             <HostingInsight url={url} isGreenHost={isGreenHost} setIsGreenHost={setIsGreenHost}/>
             <p>{bytesSent}</p>
+            <EmissionComparison emissions={emissions}/>
             <PageSpeedInsights 
               url={url} 
               setBytesSent={setBytesSent}

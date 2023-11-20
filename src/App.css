@@ -16,7 +16,7 @@
 
 body {
     background-color: var(--background);
-    --background: #040E0F;
+    --background: #051112;
     --dark-green: #004446;
     --light-green: #007C05;
     --red: #BE1111;
@@ -29,5 +29,5 @@ body {
 
 .carbon-insights-visible {
     display: block;
-    padding-top: 400px;
+    padding-top: 440px;
 }
