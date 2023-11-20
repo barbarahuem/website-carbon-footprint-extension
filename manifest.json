@@ -8,5 +8,9 @@
     },
     "permissions": [
         "tabs"
-    ]
+    ],
+    "icons": {
+            "16": "images/Logo.png"
+          }
+    
 }

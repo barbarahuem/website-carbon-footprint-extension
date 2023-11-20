@@ -34,6 +34,9 @@ module.exports = {
                 use: [
                     {
                         loader: 'file-loader',
+                        options: {
+                            outputPath: 'images'
+                        }
                     }
         ], }
         ],
@@ -42,6 +45,7 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: "manifest.json", to: "../manifest.json" },
+                { from: "src/images", to: "../images" },
             ],
         }),
         ...getHtmlPlugins(["index"]),

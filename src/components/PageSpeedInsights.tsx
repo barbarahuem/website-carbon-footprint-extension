@@ -29,7 +29,7 @@ interface Parameters {
 const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   url,
   setBytesSent,
-  setCarbonFootprint,
+  setCarbonFootprint
 }) => {
   const [cruxMetrics, setCruxMetrics] = useState<{ [key: string]: string }>({}); 
   const [lighthouseMetrics, setLighthouseMetrics] = useState<LighthouseMetrics>({});
@@ -41,6 +41,9 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
       const url = setUpQuery();
       const response = await fetch(url);
       const json = await response.json();
+      if (json.error) {
+        return;
+      }
 
       // Update the state to render the content
       if (json.loadingExperience && json.loadingExperience.metrics) {
