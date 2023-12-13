@@ -89,17 +89,11 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
         };
 
         const lighthousePotentialSavings: LighthousePotentialSavings = {
-          'Offscreen Images': {
-            sec: lighthouse.audits['offscreen-images']?.displayValue || 'N/A',
-          },
           'Render Blocking Resources': {
             sec: lighthouse.audits['render-blocking-resources']?.displayValue || 'N/A',
           },
           'Unused CSS': {
             sec: lighthouse.audits['unused-css-rules']?.displayValue || 'N/A',
-          },
-          'Bytes Sent': {
-            sec: lighthouse.audits['total-byte-weight']?.displayValue || 'N/A',
           }
         };
 
