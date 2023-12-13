@@ -1,5 +1,5 @@
 # website-carbon-footprint-extension
-A browser extension which measures the carbon footprint of the current website 🌱
+A browser extension which measures the carbon footprint of the current open tab 🌱
 # Instruction
 To make the application work first clone the repro in a directory of your choice: <br>
 ``` git clone https://github.com/barbarahuem/website-carbon-footprint-extension.git``` <br>
