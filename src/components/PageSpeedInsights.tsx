@@ -54,6 +54,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
         setCruxMetrics(cruxMetrics);
       }
 
+      // setting values for lighthouse metrics
       if (json.lighthouseResult) {
         const lighthouse = json.lighthouseResult;
         if (lighthouse) {
@@ -154,7 +155,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
           <>
             <li key={metric}>
               <strong>{metric}: </strong>
-              <em>{value.sec}</em>
+              {value.sec}
             </li>
             <hr />
           </>

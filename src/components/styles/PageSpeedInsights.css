@@ -10,11 +10,10 @@
     padding: 15px;
 }
 
-/* first three metrics-list-item should have a border on the bottom */
 .metrics-list-item:nth-child(-n+3) {
     border-bottom: 1px solid #131F21;
 }
-/* all metrics-list-item should have a border on the right instead of the last*/
+
 .metrics-list-item:not(:nth-child(3n)) {
     border-right: 1px solid #131F21;
 }
@@ -56,10 +55,11 @@
 
 .metrics-savings {
     list-style: none;
+    text-align: left;
 }
 
 hr {
     border: 0;
     height: 1px;
-    background: #063236;
+    background: #131F21;
 }
