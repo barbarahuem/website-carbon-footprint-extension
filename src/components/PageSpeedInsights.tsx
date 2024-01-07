@@ -12,7 +12,7 @@ interface LighthouseMetrics {
 
 interface LighthousePotentialSavings {
   [key: string]: {
-    sec: string;
+    text: string;
   };
 }
 
@@ -35,6 +35,8 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   const [lighthouseMetrics, setLighthouseMetrics] = useState<LighthouseMetrics>({});
   const [lighthousePotentialSavings, setLighthousePotentialSavings] =
     useState<LighthousePotentialSavings>({});
+
+  const [lighthousePerformance, setLighthousePerformance] = useState<string>('');
 
   useEffect(() => {
     async function run() {
@@ -85,20 +87,40 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
             averageMax: 6.5,
             score: lighthouse.audits['first-cpu-idle']?.score || 'N/A',
             sec: lighthouse.audits['first-cpu-idle']?.displayValue || 'N/A',
-          }
+          },
+          'Estimated Input Latency': {
+            goodMax: 50,
+            averageMax: 100,
+            sec: lighthouse.audits['estimated-input-latency']?.displayValue || 'N/A',
+          },
         };
+
+        const lightHousePerformance = lighthouse.categories.performance.score * 100;
 
         const lighthousePotentialSavings: LighthousePotentialSavings = {
           'Render Blocking Resources': {
-            sec: lighthouse.audits['render-blocking-resources']?.displayValue || 'N/A',
+            text: lighthouse.audits['render-blocking-resources']?.displayValue || 'N/A',
           },
           'Unused CSS': {
-            sec: lighthouse.audits['unused-css-rules']?.displayValue || 'N/A',
-          }
+            text: lighthouse.audits['unused-css-rules']?.displayValue || 'N/A',
+          },
+          'Unminified CSS': {
+            text: lighthouse.audits['unminified-css']?.displayValue || 'N/A',
+          },
+          'Unminified JavaScript': {
+            text: lighthouse.audits['unminified-javascript']?.displayValue || 'N/A',
+          },
+          'Unused JavaScript': {
+            text: lighthouse.audits['unused-javascript']?.displayValue || 'N/A',
+          },
+          'Legacy JavaScript': {
+            text: lighthouse.audits['legacy-javascript']?.displayValue || 'N/A',
+          },
         };
 
         setLighthouseMetrics(lighthouseMetrics);
         setLighthousePotentialSavings(lighthousePotentialSavings);
+        setLighthousePerformance(lightHousePerformance.toString());
         
         const totalByteWeight = lighthouse.audits['total-byte-weight']?.displayValue || 'N/A';
         setBytesSent(totalByteWeight);
@@ -124,6 +146,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   return (
     <div className="PageSpeedInsights">
       <h1>Lighthouse Metrics</h1>
+      <h2>Performance: {lighthousePerformance}</h2>
       <div className='metrics-list'>
         {Object.entries(lighthouseMetrics).map(([metric, value]) => (
           <div key={metric} className="metrics-list-item">
@@ -146,13 +169,14 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
       <h1>Potential Savings</h1>
       <ul className='metrics-savings'>
         {Object.entries(lighthousePotentialSavings).map(([metric, value]) => (
-          <>
-            <li key={metric}>
-              <strong>{metric}: </strong>
-              {value.sec}
+          <div className="potential-savings-box" key={metric}>
+            <li>
+              <p className="potential-savings-box-text">
+                <strong>{metric}: </strong><br/>
+                {value.text}
+              </p>
             </li>
-            <hr />
-          </>
+          </div>
         ))}
       </ul>
     </div>
