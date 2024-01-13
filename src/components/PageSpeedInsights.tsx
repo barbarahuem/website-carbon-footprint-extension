@@ -98,23 +98,32 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
         const lightHousePerformance = lighthouse.categories.performance.score * 100;
 
         const lighthousePotentialSavings: LighthousePotentialSavings = {
-          'Render Blocking Resources': {
-            text: lighthouse.audits['render-blocking-resources']?.displayValue || 'N/A',
-          },
-          'Unused CSS': {
+          'Reduce Unused CSS': {
             text: lighthouse.audits['unused-css-rules']?.displayValue || 'N/A',
           },
-          'Unminified CSS': {
-            text: lighthouse.audits['unminified-css']?.displayValue || 'N/A',
-          },
-          'Unminified JavaScript': {
-            text: lighthouse.audits['unminified-javascript']?.displayValue || 'N/A',
-          },
-          'Unused JavaScript': {
+          'Reduce Unused JavaScript': {
             text: lighthouse.audits['unused-javascript']?.displayValue || 'N/A',
           },
-          'Legacy JavaScript': {
-            text: lighthouse.audits['legacy-javascript']?.displayValue || 'N/A',
+          'Reduce JavaScript Execution Time': {
+            text: lighthouse.audits['bootup-time']?.displayValue || 'N/A',
+          },
+          'Reduce Third Party Usage': {
+            text: lighthouse.audits['third-party-summary']?.displayValue || 'N/A',
+          },
+          'Avoid an Excessive DOM Size': {
+            text: lighthouse.audits['dom-size']?.displayValue || 'N/A',
+          },
+          'Eliminate Render-Blocking Resources': {
+            text: lighthouse.audits['render-blocking-resources']?.displayValue || 'N/A',
+          },
+          'Properly Size Images': {
+            text: lighthouse.audits['uses-responsive-images']?.displayValue || 'N/A',
+          },
+          'Use Video Formats for Animated Content': {
+            text: lighthouse.audits['efficient-animated-content']?.displayValue || 'N/A',
+          },
+          'Enable Text Compression': {
+            text: lighthouse.audits['uses-text-compression']?.displayValue || 'N/A',
           },
         };
 

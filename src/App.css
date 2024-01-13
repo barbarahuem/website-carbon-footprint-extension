@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: center;
     width: 70vh;
-    height: 70vh;
+    height: 100vh;
 }
 
 
@@ -30,5 +30,5 @@ body {
 
 .carbon-insights-visible {
     display: block;
-    padding-top: 800px;
+    padding-top: 850px;
 }

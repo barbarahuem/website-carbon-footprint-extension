@@ -8,7 +8,7 @@ interface EmissionsProps {
 }
 
 const Emissions: React.FC<EmissionsProps> = ({ isGreenHost, carbonFootprint, setEmissions }) => {
-  const co2Emission = new co2();
+  const co2Emission = new co2({model: "1byte"});
 
   const estimatedCO2 = co2Emission.perByte(carbonFootprint, isGreenHost);
   setEmissions(estimatedCO2);
