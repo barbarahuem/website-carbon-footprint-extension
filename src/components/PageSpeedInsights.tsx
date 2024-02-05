@@ -18,8 +18,8 @@ interface LighthousePotentialSavings {
 
 interface PageSpeedInsightsProps {
     url: string;
-    setBytesSent: React.Dispatch<React.SetStateAction<string>>;
-    setCarbonFootprint: React.Dispatch<React.SetStateAction<number>>;
+    setKbSent: React.Dispatch<React.SetStateAction<string>>;
+    setBytesSent: React.Dispatch<React.SetStateAction<number>>;
   }
 
 interface Parameters {
@@ -28,8 +28,8 @@ interface Parameters {
 
 const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   url,
-  setBytesSent,
-  setCarbonFootprint
+  setKbSent,
+  setBytesSent
 }) => {
   const [cruxMetrics, setCruxMetrics] = useState<{ [key: string]: string }>({}); 
   const [lighthouseMetrics, setLighthouseMetrics] = useState<LighthouseMetrics>({});
@@ -132,8 +132,8 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
         setLighthousePerformance(lightHousePerformance.toString());
         
         const totalByteWeight = lighthouse.audits['total-byte-weight']?.displayValue || 'N/A';
-        setBytesSent(totalByteWeight);
-        setCarbonFootprint(Number(totalByteWeight.replace(/\D/g, '')) * 1024); // Kibibytes to bytes
+        setKbSent(totalByteWeight);
+        setBytesSent(Number(totalByteWeight.replace(/\D/g, '')) * 1024); // Kibibytes to bytes
       }
       }
     }

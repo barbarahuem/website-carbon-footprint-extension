@@ -3,21 +3,15 @@ import "./styles/Emissions.css"
 
 interface EmissionsProps {
   isGreenHost: boolean;
-  carbonFootprint: number;
+  bytesSent: number;
   setEmissions: (emissions: number) => void;
 }
 
-const Emissions: React.FC<EmissionsProps> = ({ isGreenHost, carbonFootprint, setEmissions }) => {
-  const co2Emission = new co2({model: "1byte"});
+const Emissions: React.FC<EmissionsProps> = ({ isGreenHost, bytesSent, setEmissions }) => {
+  const co2Emission = new co2(); // modell can be defined here
 
-  const estimatedCO2 = co2Emission.perByte(carbonFootprint, isGreenHost);
+  const estimatedCO2 = co2Emission.perByte(bytesSent, isGreenHost);
   setEmissions(estimatedCO2);
-
-  console.log(
-    `Sending a gigabyte, had a carbon footprint of ${estimatedCO2.toFixed(
-      3
-    )} grams of CO2`
-  );
 
   return (
     <div className="emissions-bubble">

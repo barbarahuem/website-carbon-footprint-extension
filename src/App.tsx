@@ -32,6 +32,8 @@ function App() {
     if(bytesSent !== '') {
       setIsFetching(false);
     }
+    console.log("bytesSent", bytesSent);
+    console.log("carbonFootprint", carbonFootprint);
   } ,[bytesSent]);
 
 
