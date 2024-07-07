@@ -9,8 +9,10 @@ import { Rings } from "react-loader-spinner";
 
 function App() {
   const [isGreenHost, setIsGreenHost] = useState(false);
-  const [bytesSent, setBytesSent] = useState('');
-  const [carbonFootprint, setCarbonFootprint] = useState(0);
+
+  const [kiBSent, setKiBSent] = useState('');
+  const [bytesSent, setBytesSent] = useState(0);
+
   const [isFetching, setIsFetching] = useState(true);
   const [url, setUrl] = useState('');
   const [emissions, setEmissions] = useState(0);
@@ -29,12 +31,12 @@ function App() {
         setUrl(url);
       }
     });
-    if(bytesSent !== '') {
+    if(kiBSent !== '') {
       setIsFetching(false);
     }
-    console.log("bytesSent", bytesSent);
-    console.log("carbonFootprint", carbonFootprint);
-  } ,[bytesSent]);
+    console.log("KiB sent", kiBSent);
+    console.log("Bytes Sent", bytesSent);
+  } ,[kiBSent]);
 
 
   return (
@@ -47,16 +49,16 @@ function App() {
           </div>
         }   
         <div className={isFetching ? "carbon-insights-invisible" : "carbon-insights-visible"}>
-          <Emissions isGreenHost={isGreenHost} carbonFootprint={carbonFootprint} setEmissions={setEmissions} />
+          <Emissions isGreenHost={isGreenHost} bytesSent={bytesSent} setEmissions={setEmissions} />
             { url &&
               <>
               <HostingInsight url={url} isGreenHost={isGreenHost} setIsGreenHost={setIsGreenHost}/>
-              <p>{bytesSent}</p>
+              <p>{kiBSent}</p>
               <EmissionComparison emissions={emissions}/>
               <PageSpeedInsights 
                 url={url} 
+                setKiBSent={setKiBSent}
                 setBytesSent={setBytesSent}
-                setCarbonFootprint={setCarbonFootprint}
                 />
             </>
             }

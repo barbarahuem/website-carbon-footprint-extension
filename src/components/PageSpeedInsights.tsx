@@ -18,7 +18,7 @@ interface LighthousePotentialSavings {
 
 interface PageSpeedInsightsProps {
     url: string;
-    setKbSent: React.Dispatch<React.SetStateAction<string>>;
+    setKiBSent: React.Dispatch<React.SetStateAction<string>>;
     setBytesSent: React.Dispatch<React.SetStateAction<number>>;
   }
 
@@ -28,7 +28,7 @@ interface Parameters {
 
 const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   url,
-  setKbSent,
+  setKiBSent,
   setBytesSent
 }) => {
   const [cruxMetrics, setCruxMetrics] = useState<{ [key: string]: string }>({}); 
@@ -132,7 +132,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
         setLighthousePerformance(lightHousePerformance.toString());
         
         const totalByteWeight = lighthouse.audits['total-byte-weight']?.displayValue || 'N/A';
-        setKbSent(totalByteWeight);
+        setKiBSent(totalByteWeight);
         setBytesSent(Number(totalByteWeight.replace(/\D/g, '')) * 1024); // Kibibytes to bytes
       }
       }
@@ -155,7 +155,7 @@ const PageSpeedInsights: React.FC<PageSpeedInsightsProps> = ({
   return (
     <div className="PageSpeedInsights">
       <h1>Lighthouse Metrics</h1>
-      <h2>Performance: {lighthousePerformance}</h2>
+      <h2>Performance: {Math.round(parseInt(lighthousePerformance))}</h2>
       <div className='metrics-list'>
         {Object.entries(lighthouseMetrics).map(([metric, value]) => (
           <div key={metric} className="metrics-list-item">
